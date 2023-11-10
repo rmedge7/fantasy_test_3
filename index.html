@@ -4,9 +4,18 @@
     <title>League Standings</title>
 </head>
 <body>
-    <!-- Your HTML content goes here -->
     <table id="standings">
-    <!-- Table rows will be added here dynamically -->
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Ties</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be added here dynamically -->
+        </tbody>
     </table>
     <script>
         // Make an HTTP GET request to your API endpoint
@@ -18,12 +27,15 @@
             return response.json(); // Parse the JSON data
           })
           .then(data => {
-        // Access the 'data' variable here
+            // Sort the data by wins in descending order
+            data.sort((a, b) => b.settings.wins - a.settings.wins);
+            
             const table = document.getElementById('standings'); // Get the table element
+            const tbody = table.querySelector('tbody'); // Get the table body
         
-            // Loop through the data and create table rows and cells
+            // Loop through the sorted data and create table rows and cells
             data.forEach(team => {
-                const row = table.insertRow(); // Insert a new row
+                const row = tbody.insertRow(); // Insert a new row
         
                 // Create table cells and populate with data
                 const nameCell = row.insertCell(0);
