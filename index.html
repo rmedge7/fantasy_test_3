@@ -4,15 +4,16 @@
     <title>League Standings</title>
 </head>
 <body>
+    <!-- Your HTML content goes here -->
     <table id="standings">
-        <!-- Table rows will be added here dynamically -->
+    <!-- Table rows will be added here dynamically -->
     </table>
     <script>
         // Make an HTTP GET request to your API endpoint
         fetch('https://api.sleeper.app/v1/league/997862686069198848/rosters')
           .then(response => {
             if (!response.ok) {
-              throw an Error('Network response was not ok');
+              throw new Error('Network response was not ok');
             }
             return response.json(); // Parse the JSON data
           })
