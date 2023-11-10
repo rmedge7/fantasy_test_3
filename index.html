@@ -7,7 +7,7 @@
     <table id="standings">
         <thead>
             <tr>
-                <th>Team</th>
+                <th>Team Name</th>
                 <th>Wins</th>
                 <th>Losses</th>
                 <th>Ties</th>
@@ -18,7 +18,7 @@
         </tbody>
     </table>
     <script>
-          // Create a mapping object to link roster_id to team_name
+        // Create a mapping object to link roster_id to team_name
         const idToNameMapping = {
             'roster_id_1': 'Charlie',
             'roster_id_2': 'Ben',
@@ -32,7 +32,8 @@
             'roster_id_10': 'Rob',
             // Add more mappings as needed
         };
-      // Make an HTTP GET request to your API endpoint
+
+        // Make an HTTP GET request to your API endpoint
         fetch('https://api.sleeper.app/v1/league/997862686069198848/rosters')
           .then(response => {
             if (!response.ok) {
