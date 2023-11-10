@@ -32,7 +32,7 @@
             'roster_id_10': 'Rob',
             // Add more mappings as needed
         };
-        // Make an HTTP GET request to your API endpoint
+      // Make an HTTP GET request to your API endpoint
         fetch('https://api.sleeper.app/v1/league/997862686069198848/rosters')
           .then(response => {
             if (!response.ok) {
@@ -50,6 +50,9 @@
             // Loop through the sorted data and create table rows and cells
             data.forEach(team => {
                 const row = tbody.insertRow(); // Insert a new row
+                
+                // Get the team_name from the mapping
+                const teamName = idToNameMapping[team.roster_id] || 'Unknown Team';
         
                 // Create table cells and populate with data
                 const nameCell = row.insertCell(0);
@@ -57,10 +60,10 @@
                 const lossesCell = row.insertCell(2);
                 const tiesCell = row.insertCell(3);
         
-                nameCell.innerHTML = team.roster_id; // Replace with your data field name
-                winsCell.innerHTML = team.settings.wins; // Replace with your data field name
-                lossesCell.innerHTML = team.settings.losses; // Replace with your data field name
-                tiesCell.innerHTML = team.settings.ties; // Replace with your data field name
+                nameCell.innerHTML = teamName; // Display the team_name
+                winsCell.innerHTML = team.settings.wins;
+                lossesCell.innerHTML = team.settings.losses;
+                tiesCell.innerHTML = team.settings.ties;
             });
           })
           .catch(error => {
