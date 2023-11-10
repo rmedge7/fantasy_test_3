@@ -12,18 +12,21 @@ async function fetchMatchupData() {
     }
 
     const data = await response.json();
-    const matchups = data.matchups;
+    const matchups = data;
 
-    const rosterPoints = matchups.map((matchup, index) => ({
+    const rosterPoints = matchups.map((matchup) => ({
       roster_id: matchup.roster_id,
       points: matchup.points,
-      median: index < 5 ? 0.5 : 0
+      median: 0,
     }));
 
-    // Sort the array in descending order by points
     rosterPoints.sort((a, b) => b.points - a.points);
 
-    return rosterPoints; // Return the array with median values
+    for (let i = 0; i < Math.min(5, rosterPoints.length); i++) {
+      rosterPoints[i].median = 0.5;
+    }
+
+    return rosterPoints; // Return the array
   } catch (error) {
     console.error('Error:', error);
     return null; // Handle errors by returning null or an appropriate value
@@ -32,9 +35,9 @@ async function fetchMatchupData() {
 
 async function main() {
   const result = await fetchMatchupData();
-
+  
   if (result !== null) {
-    // You can use the result array with median values here
+    // You can use the result array here
     console.log(result);
   }
 }
