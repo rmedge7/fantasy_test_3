@@ -17,6 +17,8 @@
             <!-- Table rows will be added here dynamically -->
         </tbody>
     </table>
+    <!-- Include medianarray_week1.js script -->
+    <script src="medianarray_week1.js"></script>
     <script>
         // Create a mapping object to link roster_id to team_name
         const idToNameMapping = {
@@ -55,6 +57,10 @@
                 // Get the team_name from the mapping
                 const teamName = idToNameMapping[team.roster_id] || 'Unknown Team';
         
+                // Update wins based on true_med value
+                const trueMedValue = totalTrueMedByRoster[team.roster_id] || 0;
+                const updatedWins = team.settings.wins - trueMedValue;
+                
                 // Create table cells and populate with data
                 const nameCell = row.insertCell(0);
                 const winsCell = row.insertCell(1);
@@ -62,7 +68,7 @@
                 const tiesCell = row.insertCell(3);
         
                 nameCell.innerHTML = teamName; // Display the team_name
-                winsCell.innerHTML = team.settings.wins;
+                winsCell.innerHTML = updatedWins;
                 lossesCell.innerHTML = team.settings.losses;
                 tiesCell.innerHTML = team.settings.ties;
             });
