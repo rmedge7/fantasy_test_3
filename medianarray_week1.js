@@ -11,8 +11,8 @@ const fetchWeekData = (week) => {
     });
 };
 
-// Array to store data for all weeks
-const allWeeksData = [];
+// Object to store total true_med values for each roster_id
+const totalTrueMedByRoster = {};
 
 // Iterate over all 14 weeks
 for (let week = 1; week <= 14; week++) {
@@ -47,13 +47,18 @@ for (let week = 1; week <= 14; week++) {
       // Log the resulting array for the current week
       console.log(`Week ${week} Data:`, rosterPointsArray);
 
-      // Store the data for the current week in the allWeeksData array
-      allWeeksData.push({ week, data: rosterPointsArray });
+      // Update total true_med values for each roster_id
+      rosterPointsArray.forEach(entry => {
+        if (!totalTrueMedByRoster[entry.roster_id]) {
+          totalTrueMedByRoster[entry.roster_id] = 0;
+        }
+        totalTrueMedByRoster[entry.roster_id] += entry.true_med;
+      });
     })
     .catch(error => {
       console.error(`There was a problem with the fetch operation for week ${week}:`, error);
     });
 }
 
-// Log the resulting array for all weeks
-console.log('All Weeks Data:', allWeeksData);
+// Log the total true_med values for each roster_id
+console.log('Total true_med values by roster_id:', totalTrueMedByRoster);
